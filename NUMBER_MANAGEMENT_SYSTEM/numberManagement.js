@@ -6,11 +6,7 @@ router.get("/numbers", async (req, res) => {
   const { query } = req;
   let urls;
 
-  if (typeof query.url === "object" && !Array.isArray(query.url)) {
-    urls = [query.url];
-  } else {
-    urls = query.url;
-  }
+ 
 
   const fetchPromises = urls.map(async (url) => {
     try {
