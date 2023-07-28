@@ -1,0 +1,22 @@
+
+.DS_Store
+
+
+/build/
+/dist/
+
+/node_modules/
+
+
+
+# Ignore log files
+*.log
+
+# Ignore temporary files (e.g., .tmp, .bak, .swp)
+*.tmp
+*.bak
+*.swp
+
+# Ignore credentials or sensitive information
+secrets.txt
+config.ini
