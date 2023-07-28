@@ -30,8 +30,8 @@ router.get("/numbers", async (req, res) => {
       .map((result) => result.value)
       .flat();
 
-    const uniqueNumbers = Array.from(new Set(validResponses));
-    const numbers = uniqueNumbers.sort((a, b) => a - b);
+    const uniqueNums = Array.from(new Set(validResponses));
+    const numbers = uniqueNums.sort((a, b) => a - b);
     res.status(200).json({ numbers });
   } catch (error) {
     console.error(error);
