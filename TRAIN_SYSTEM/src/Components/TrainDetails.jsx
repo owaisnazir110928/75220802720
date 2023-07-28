@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchTrainDetails } from "./api";
+import SkeletonTrainItem from "./SkeletonTrainItem";
 
 function TrainDetails() {
   const { id } = useParams();
@@ -27,34 +28,46 @@ function TrainDetails() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
-        {loading && <div className="text-center">Loading...</div>}
+      <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        {loading && <SkeletonTrainItem />}
         {error && <div className="text-center text-red-500">{error}</div>}
         {train && (
           <>
-            <h2 className="text-2xl font-bold mb-4">{train.trainName}</h2>
+            <h2 className="text-3xl font-semibold mb-4">{train.trainName}</h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-gray-600">Train Number:</p>
-                <p>{train.trainNumber}</p>
-                <p className="text-gray-600 mt-2">Departure Time:</p>
-                <p>
+                <p className="text-gray-600 text-lg">
+                  <i className="fas fa-train mr-2"></i> Train Number:
+                </p>
+                <p className="text-xl font-semibold">{train.trainNumber}</p>
+                <p className="text-gray-600 mt-2 text-lg">
+                  <i className="far fa-clock mr-2"></i> Departure Time:
+                </p>
+                <p className="text-xl font-semibold">
                   {`${train.departureTime.Hours}:${train.departureTime.Minutes}:${train.departureTime.Seconds}`}
                 </p>
               </div>
               <div>
-                <p className="text-gray-600">Delayed By:</p>
-                <p>{train.delayedBy} minutes</p>
-                <p className="text-gray-600 mt-2">Seats Available:</p>
-                <p>
+                <p className="text-gray-600 text-lg">
+                  <i className="fas fa-clock mr-2"></i> Delayed By:
+                </p>
+                <p className="text-xl font-semibold">
+                  {train.delayedBy} minutes
+                </p>
+                <p className="text-gray-600 mt-2 text-lg">
+                  <i className="fas fa-chair mr-2"></i> Seats Available:
+                </p>
+                <p className="text-xl font-semibold">
                   Sleeper: {train.seatsAvailable.sleeper}, AC:{" "}
                   {train.seatsAvailable.AC}
                 </p>
               </div>
             </div>
-            <div className="mt-4">
-              <p className="text-gray-600">Price:</p>
-              <p>
+            <div className="mt-6">
+              <p className="text-gray-600 text-lg">
+                <i className="fas fa-dollar-sign mr-2"></i> Price:
+              </p>
+              <p className="text-xl font-semibold">
                 AC: ${train.price.AC}, Sleeper: ${train.price.sleeper}
               </p>
             </div>

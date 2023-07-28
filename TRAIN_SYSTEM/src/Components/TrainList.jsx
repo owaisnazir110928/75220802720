@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TrainListItem from "./TrainListItem";
 import { fetchAllTrains } from "./api";
+import SkeletonTrainItem from "./SkeletonTrainItem";
 
 function TrainList() {
   const [trains, setTrains] = useState([]);
@@ -87,7 +88,11 @@ function TrainList() {
         </select>
       </div>
       {loading ? (
-        <div>Loading...</div>
+        <div>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <SkeletonTrainItem key={index} />
+          ))}
+        </div>
       ) : (
         <ul className="space-y-4">
           {trains.map((train) => (
