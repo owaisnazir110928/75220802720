@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // Import the useParams hook
+import { useParams } from "react-router-dom";
 import { fetchTrainDetails } from "./api";
 
 function TrainDetails() {
-  const { id } = useParams(); // Access the trainId from the URL parameters
+  const { id } = useParams();
   const [train, setTrain] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -24,26 +24,30 @@ function TrainDetails() {
   }, [id]);
 
   return (
-    <div>
+    <div className="container mx-auto p-4">
       {loading ? (
         <div>Loading...</div>
       ) : train ? (
-        <>
-          <div>Train Number: {train.trainNumber}</div>
-          <div>Delayed By: {train.delayedBy}</div>
-          <div>Train Name: {train.trainName}</div>
-          <div>
-            Departure Time:{" "}
-            {`${train.departureTime.Hours}:${train.departureTime.Minutes}:${train.departureTime.Seconds}`}
+        <div className="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
+          <div className="mb-4">
+            <h2 className="text-2xl font-bold">{train.trainName}</h2>
+            <p className="text-gray-600">Train Number: {train.trainNumber}</p>
           </div>
-          <div>
-            Seats Available: Sleeper = {train.seatsAvailable.sleeper}, AC ={" "}
-            {train.seatsAvailable.AC}
+          <div className="border-t border-gray-300 pt-4">
+            <p className="text-lg">Delayed By: {train.delayedBy} minutes</p>
+            <p className="mt-2">
+              Departure Time:{" "}
+              {`${train.departureTime.Hours}:${train.departureTime.Minutes}:${train.departureTime.Seconds}`}
+            </p>
+            <p className="mt-2">
+              Seats Available: Sleeper = {train.seatsAvailable.sleeper}, AC ={" "}
+              {train.seatsAvailable.AC}
+            </p>
+            <p className="mt-2">
+              Price: AC = ${train.price.AC}, Sleeper = ${train.price.sleeper}
+            </p>
           </div>
-          <div>
-            Price: AC = ${train.price.AC}, Sleeper = ${train.price.sleeper}
-          </div>
-        </>
+        </div>
       ) : (
         <div>Train not found</div>
       )}

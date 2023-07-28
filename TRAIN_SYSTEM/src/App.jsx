@@ -8,12 +8,12 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<TrainList />} />
-        <Route path="/trains/:id" element={<TrainDetails/>}/>
+        <Route path="/trains/:id" element={<TrainDetails />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 }
