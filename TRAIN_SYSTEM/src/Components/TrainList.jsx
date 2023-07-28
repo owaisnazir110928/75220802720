@@ -73,14 +73,14 @@ function TrainList() {
   return (
     <div className="container mx-auto p-4">
       <div className="mb-4">
-        <label htmlFor="sortOption" className="mr-2">
+        <label htmlFor="sortOption" className="mr-2 text-gray-600">
           Sort by:
         </label>
         <select
           id="sortOption"
           value={sortOption}
           onChange={handleSortChange}
-          className="border p-2 rounded"
+          className="border p-2 rounded bg-white text-gray-600 focus:outline-none"
         >
           <option value="price">Price</option>
           <option value="seatsAvailable">Seats Available</option>
@@ -88,16 +88,20 @@ function TrainList() {
         </select>
       </div>
       {loading ? (
-        <div>
+        <div className="space-y-4">
           {Array.from({ length: 5 }).map((_, index) => (
             <SkeletonTrainItem key={index} />
           ))}
         </div>
       ) : (
         <ul className="space-y-4">
-          {trains.map((train) => (
-            <TrainListItem key={train.trainName} train={train} />
-          ))}
+          {trains.length > 0 ? (
+            trains.map((train) => (
+              <TrainListItem key={train.trainName} train={train} />
+            ))
+          ) : (
+            <div className="text-gray-600 text-center">No trains found.</div>
+          )}
         </ul>
       )}
     </div>
