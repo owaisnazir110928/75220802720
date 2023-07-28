@@ -33,13 +33,11 @@ router.get("/numbers", async (req, res) => {
     const validResponses = results
       .filter((result) => result.status === "fulfilled")
       .map((result) => result.value)
-      .flat(); // Flatten the array of arrays into a single array
+      .flat();
 
     // Remove duplicates by converting the array to a Set and then back to an array
-    const uniqueNumbers = Array.from(new Set(validResponses));
-
-    // Sort the numbers in ascending order
-    const numbers = uniqueNumbers.sort((a, b) => a - b);
+    const uniqueNums = Array.from(new Set(validResponses));
+    const numbers = uniqueNums.sort((a, b) => a - b);
 
     // Respond with the sorted and unique numbers in JSON format
     res.status(200).json({ numbers });
